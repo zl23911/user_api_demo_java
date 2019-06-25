@@ -37,6 +37,25 @@ public class Api {
         return null;
     }
 
+        public static String checkDepositAddress(String currencyName, String address) {
+        try {
+
+            Map<String, Object> param = new HashMap<>();
+            param.put("currencyName", currencyName);
+            param.put("address", address);
+
+            String path = "/exchange/fund/controller/website/fundcontroller/checkdepositaddress";
+            Map<String, String> headers = SignUtils.getHeaderOfKeyValue(GlobalConstant.API_ID, GlobalConstant.API_SECRET, param);
+
+            String returnMsg = io.at.base.utils.HttpUtils.doGet("https://www.zbg.com", path, param , headers);
+
+            return returnMsg;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
     public static String getMarketList() {
         Map<String, String> headers = SignUtils.getHeaderOfNoParams(GlobalConstant.API_ID, GlobalConstant.API_SECRET);
         try {
